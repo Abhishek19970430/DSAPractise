@@ -22,11 +22,11 @@ public class Assignment5 {
 	}
 	
 	public class CLL{
-		Node last;
+		 private Node last;
 		
 		public class Node{
-			int item;
-			Node next;
+			private int item;
+			private Node next;
 			public void setItem(int data) {
 				this.item= data;
 			}
@@ -68,13 +68,14 @@ public class Assignment5 {
 				n.setItem(data);
 				
 				if(isEmpty()) {
-					last= n;
+					
 					n.setNext(last);
 				}else {
 					n.setNext(last.getNext());
 					last.setNext(n);
-					last= n;
+					
 				}
+				last= n;
 				
 			}
 			
@@ -97,11 +98,19 @@ public class Assignment5 {
 	 }
 	 
 	 public void insertAfter(int data, Node t) {
-		 Node n= new Node();
-		 n.setItem(data);
+		 if(t!=null) {
+			 Node n= new Node();
+			 n.setItem(data);
+			 
+			 n.setNext(t.getNext());
+			 t.setNext(n);
+			 
+			 if(t==last) {
+				 last= n;
+			 }
+			 
+		 }
 		 
-		 n.setNext(t.getNext());
-		 t.setNext(n);
 		
 	 }
 	 

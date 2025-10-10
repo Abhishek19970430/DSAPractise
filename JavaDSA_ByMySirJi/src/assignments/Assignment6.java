@@ -1,19 +1,28 @@
 package assignments;
 
-import java.awt.dnd.peer.DropTargetPeer;
-
 public class Assignment6 {
 	public void driver() {
-//	 CDLL obj = new CDLL();
+		CDLL obj = new CDLL();
+		obj.insertFirst(10);
+		obj.insertFirst(20);
+		obj.insertFirst(30);
+		obj.insertFirst(40);
+
+	 obj.insertAfter(99, obj.search(40));
+	 obj.deleteFirst();
+     obj.deleteLast();
+     obj.Display();
+    obj.deleteNode(30);
+		obj.Display();
 
 	}
 
 }
 
 class CDLL {
-	Node start;
+	private Node start;
 
-	class Node {
+	public class Node {
 
 		private int item;
 		private Node prev;
@@ -57,10 +66,6 @@ class CDLL {
 			start = n;
 			n.setNext(n);
 			n.setPrev(n);
-		} else if (start.getPrev() == start.getNext()) {
-			n.setPrev(start);
-			n.setNext(start);
-			start = n;
 		} else {
 			n.setNext(start);
 			n.setPrev(start.getPrev());
@@ -80,11 +85,6 @@ class CDLL {
 			start = n;
 			n.setNext(n);
 			n.setPrev(n);
-		} else if (start.getPrev() == start.getNext()) {
-			n.setPrev(start.getNext());
-			n.setNext(start);
-			start.setNext(n);
-			start.setPrev(n);
 		} else {
 			n.setPrev(start.getPrev());
 			n.setNext(start);
@@ -94,56 +94,87 @@ class CDLL {
 	}
 
 	public Node search(int value) {
-
-		if (start != null) {
-			try {
-				Node t;
-				t = start.getNext();
-				do {
-					if (t.getItem() == value) {
-						return t;
-					}
-					t = t.getNext();
-				} while (t != start.getNext());
-				return null;
-
-			} catch (NullPointerException e) {
-				return null;
-			}
-		}else {
-			System.out.println("Can not Search List is Empty");
+		try {
+			Node t;
+			t = start;
+			do {
+				if (t.getItem() == value) {
+					return t;
+				}
+				t = t.getNext();
+			} while (t != start);
+			return null;
+		} catch (NullPointerException e) {
+			return null;
 		}
-
 	}
-	
+
 	public void insertAfter(int data, Node t) {
-		if(t!=null) {
-			if(start.getNext()==start.getPrev()) {
-				insertLast(data);
-			}
+		if (t != null) {
+			
 			Node n = new Node();
+			n.setItem(data);
 			n.setPrev(t);
 			n.setNext(t.getNext());
 			t.getNext().setPrev(n);
 			t.setNext(n);
-			
-		}else {
+
+		} else {
 			System.out.println("Item Not Found in a List");
 		}
-		
-		
+
 	}
 
-	
 	public void deleteFirst() {
-		if(isEmpty()) {
+		if (isEmpty()) {
 			System.out.println("Can Not delete List is Empty");
-		}else if(start.getPrev()==start.getNext()) {
-			start= null;
-		}else {
+		} else if (start.getPrev() == start.getNext()) {
+			start = null;
+		} else {
 			start.getPrev().setNext(start.getNext());
-			start.getNext().setPrev(start);
-			 
+			start.getNext().setPrev(start.getPrev());
+			start = start.getNext();
+
 		}
 	}
+
+	public void deleteLast() {
+		if (isEmpty()) {
+			System.out.println("Can Not delete List is Empty");
+		} else if (start.getPrev() == start.getNext()) {
+			start = null;
+		} else {
+			Node target = start.getPrev().getPrev();
+			target.setNext(start);
+			start.setPrev(target);
+
+		}
+	}
+
+	public void deleteNode(int value) {
+		Node t = search(value);
+		if (t != null) {
+			if (start.getPrev() == start.getNext()) {
+				start = null;
+			} else if (t == start) {
+				deleteFirst();
+			} else if (t == start.getPrev()) {
+				deleteLast();
+			} else {
+				t.getPrev().setNext(t.getNext());
+				t.getNext().setPrev(t.getPrev());
+			}
+		}
+
+	}
+
+	public void Display() {
+		Node t = start;
+		System.out.println();
+		do {
+			System.out.print(t.getItem() + " ");
+			t = t.getNext();
+		} while (t != start);
+	}
+
 }

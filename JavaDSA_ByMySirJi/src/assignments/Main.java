@@ -15,8 +15,11 @@ public class Main {
 //		Assignment4 obj4 = new Assignment4();
 //		obj4.driver();
 		
-		Assignment5 obj5 = new Assignment5();
-		obj5.driver();
+//		Assignment5 obj5 = new Assignment5();
+//		obj5.driver();
+		
+		Assignment6 obj6 = new Assignment6();
+		obj6.driver();
 		
 		
 	}

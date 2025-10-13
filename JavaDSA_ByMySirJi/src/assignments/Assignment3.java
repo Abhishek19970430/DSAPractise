@@ -3,7 +3,7 @@ package assignments;
 public class Assignment3 {
    public void driver() {
 	   SLL s = new SLL();
-//	   
+   
 //	 s.insertAtStart(100); 
 //	 
 //	 s.insertAtStart(200); 
@@ -17,7 +17,7 @@ public class Assignment3 {
 	 s.insertAtEnd(6);
 	 s.insertAtEnd(6);
 	 s.Display();
-	 s.deleteAfter(500);
+	 s.deleteNode(500);
 	 s.Display();
    }
 	

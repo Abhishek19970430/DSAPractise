@@ -2,7 +2,7 @@ package assignments;
 
 public class Assignment9 {
     public void driver(){
-        Queue Q=new Queue(5);
+        QueueLists Q=new QueueLists(5);
         Q.insert(10);
         Q.insert(20);
         Q.insert(30);
@@ -24,10 +24,10 @@ public class Assignment9 {
         System.out.println("Front Item: "+Q.getFrontItem());
     }
 }
-class Queue{
+ class QueueLists{
     private int front,rear;
     private int []ptr;
-    public Queue(int size){
+    public QueueLists(int size){
         rear=-1;
         front=-1;
         ptr=new int[size];
